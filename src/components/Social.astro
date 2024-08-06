@@ -1,0 +1,41 @@
+---
+interface SocialLinkProps {
+  platform: string;
+  username: string;
+  prefix?: string;
+}
+
+const props = Astro.props as SocialLinkProps;
+
+function constructUrl({ platform, username, prefix }: SocialLinkProps): string {
+  if (!platform) {
+    throw new Error("Platform is required to construct the URL.");
+  }
+  if (!username) {
+    throw new Error("Username is required to construct the URL.");
+  }
+
+  let url = `https://www.${platform}.com/`;
+
+  if (prefix) {
+    url += `${prefix}/`;
+  }
+
+  url += username;
+
+  return url;
+}
+
+const url = constructUrl(props);
+---
+
+<a href={url}>{props.platform}</a>
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>
