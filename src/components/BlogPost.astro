@@ -1,0 +1,12 @@
+---
+interface BlogPostProps {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props as BlogPostProps;
+---
+
+<li>
+  <a href={url}>{title}</a>
+</li>
